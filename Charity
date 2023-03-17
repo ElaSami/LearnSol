@@ -1,0 +1,23 @@
+pragma solidity ^0.8.4;
+
+contract Contract {
+    address payable public owner;
+    address payable public charity;
+
+    constructor(address payable _charity) {
+        owner = payable(msg.sender);
+        charity = _charity;
+    }
+
+    receive() external payable {
+        // do something with the received ether
+    }
+
+    function tip() payable public {
+        owner.transfer(msg.value);
+    }
+
+    function donate() payable public {
+        charity.transfer(address(this).balance);
+    }
+}
