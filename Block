@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+
+library Prime {
+    function dividesEvenly(uint num1, uint num2) public pure returns (bool) {
+        return num1 % num2 == 0;
+    }
+    
+    function isPrime(uint num) public pure returns (bool) {
+        if (num < 2) {
+            return false;
+        }
+        if (num == 2) {
+            return true;
+        }
+        if (dividesEvenly(num, 2)) {
+            return false;
+        }
+        for (uint i = 3; i * i <= num; i += 2) {
+            if (dividesEvenly(num, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
